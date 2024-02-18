@@ -12,6 +12,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit, OnDestroy {
+  // Set la largeur et hauteur par défaut du chart en fonction de la fenêtre du navigateur
   constructor(
     private olympicService: OlympicService,
     private router: Router,
@@ -44,6 +45,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   yAxisLabel: string = 'Medals';
   //
 
+  /*
+   * Récupération des données via le service, on gère la souscription via l'opérateur takeUntil
+   * Récupération du pays via ActivatedRoute
+   * On renseigne les propriétés du composant (data, olympic, numberOfEntries, total) en itérent sur réponse du service
+   * Si aucun pays trouvé, on redirige sur la route wildcard (404)
+   */
   ngOnInit(): void {
     this.olympicService
       .getOlympicsByCountryName(this.activatedRoute.snapshot.params['country'])
@@ -87,7 +94,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         },
       });
   }
-
+  // Méthode qui permet de resize le chart dans le cas ou la fenêtre du navigateur se rétrécit
   onResize(event: UIEvent): void {
     const target = event?.target as Window;
     if (innerWidth > 400 && innerWidth < 700) {
@@ -99,10 +106,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Empêche le formattage des valeurs de x et y avec des virgules ou points
   axisFormat(val: any) {
     return val;
   }
 
+  // OnDestroy => On émet true à l'observable destroy$ et on le complete, ce qui va permettre d'unsubscibe
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();

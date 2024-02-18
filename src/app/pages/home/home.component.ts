@@ -21,12 +21,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   public data: PieChartData[] | null = null;
   public view: [number, number] = [700, 400];
 
+  // Set la largeur et hauteur par défaut du chart en fonction de la fenêtre du navigateur
   constructor(private olympicService: OlympicService, private router: Router) {
     if (innerWidth > 400 && innerWidth < 700) {
       this.view = [innerWidth, 400];
     }
   }
 
+  /*
+   * Récupération des données via le service, on gère la souscription via l'opérateur takeUntil
+   * On renseigne les propriétés du composant (countriesNumber, data, josNumber) en itérent sur réponse du service
+   */
   ngOnInit(): void {
     this.olympicService
       .getOlympics()
@@ -56,10 +61,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  // Méthode qui est bind à l'event select du chart et qui permet de naviguer sur la page de détail
   onSelect(data: { name: string; value: number; label: string }): void {
     this.router.navigateByUrl(`/details/${data.name}`);
   }
 
+  // Méthode qui permet de resize le chart dans le cas ou la fenêtre du navigateur se rétrécit
   onResize(event: UIEvent): void {
     const target = event?.target as Window;
     if (innerWidth > 400 && innerWidth < 700) {
@@ -71,6 +78,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // OnDestroy => On émet true à l'observable destroy$ et on le complete, ce qui va permettre d'unsubscibe
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
