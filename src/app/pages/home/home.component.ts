@@ -10,6 +10,9 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 export class HomeComponent implements OnInit {
   public olympics$: Observable<any> = of(null);
 
+  public data: any = [{ name: 'test', value: 10 }];
+  public view: [number, number] = [700, 400];
+
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {

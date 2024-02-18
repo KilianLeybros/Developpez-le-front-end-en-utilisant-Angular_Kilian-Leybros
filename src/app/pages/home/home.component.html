@@ -12,5 +12,18 @@
       <b>{{ 10 }}</b>
     </div>
   </div>
-  <div class="d-flex justify-content-center"></div>
+  <div class="d-flex justify-content-center">
+    <ngx-charts-pie-chart
+      *ngIf="data"
+      [animations]="false"
+      [view]="view"
+      [scheme]="'cool'"
+      [results]="data"
+      [gradient]="false"
+      [legend]="false"
+      [labels]="true"
+      [doughnut]="false"
+    >
+    </ngx-charts-pie-chart>
+  </div>
 </div>
