@@ -33,7 +33,15 @@
       [results]="data"
       [animations]="false"
       [autoScale]="true"
+      [xAxisTickFormatting]="axisFormat"
+      [yAxisTickFormatting]="axisFormat"
+      (window:resize)="onResize($event)"
     >
+      <ng-template #seriesTooltipTemplate let-model="model">
+        <pre
+          class="tooltip d-flex align-items-center justify-content-center"
+        ><span class="material-symbols-outlined"> license </span>{{ model[0].value }}</pre>
+      </ng-template>
     </ngx-charts-line-chart>
   </div>
 </div>

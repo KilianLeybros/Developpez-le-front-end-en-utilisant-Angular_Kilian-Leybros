@@ -16,7 +16,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private olympicService: OlympicService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    if (innerWidth > 400 && innerWidth < 700) {
+      this.view = [innerWidth, 300];
+    }
+  }
 
   public loading: boolean = true;
   public olympic: Olympic | null = null;
@@ -82,6 +86,21 @@ export class DetailsComponent implements OnInit, OnDestroy {
           }
         },
       });
+  }
+
+  onResize(event: UIEvent): void {
+    const target = event?.target as Window;
+    if (innerWidth > 400 && innerWidth < 700) {
+      this.view = [target.innerWidth, 300];
+    } else if (innerWidth > 700) {
+      this.view = [700, 300];
+    } else if (innerWidth < 400) {
+      this.view = [400, 300];
+    }
+  }
+
+  axisFormat(val: any) {
+    return val;
   }
 
   ngOnDestroy(): void {
