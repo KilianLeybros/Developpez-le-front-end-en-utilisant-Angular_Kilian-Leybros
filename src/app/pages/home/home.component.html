@@ -1,3 +1,42 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div *ngIf="!loading" class="d-flex flex-column align-items-center m-auto">
+  <div class="title d-flex justify-content-center my-20">
+    Medals per Country
+  </div>
+  <div class="d-flex card-container justify-content-center mb-20">
+    <div class="d-flex flex-column align-items-center mx-20 card">
+      <p>Number of JOs</p>
+      <b>{{ josNumbers }}</b>
+    </div>
+    <div class="d-flex flex-column align-items-center mx-20 card">
+      <p>Number of countries</p>
+      <b>{{ countriesNumber }}</b>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <ngx-charts-pie-chart
+      *ngIf="data"
+      [animations]="false"
+      [view]="view"
+      [scheme]="'cool'"
+      [results]="data"
+      [gradient]="false"
+      [legend]="false"
+      [labels]="true"
+      [doughnut]="false"
+      (window:resize)="onResize($event)"
+      (select)="onSelect($event)"
+    >
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="tooltip p-5">
+          <p>
+            {{ model.name }}
+          </p>
+          <p class="d-flex align-items-center justify-content-center">
+            <span class="material-symbols-outlined"> license </span>
+            {{ model.value }}
+          </p>
+        </div>
+      </ng-template>
+    </ngx-charts-pie-chart>
+  </div>
+</div>
