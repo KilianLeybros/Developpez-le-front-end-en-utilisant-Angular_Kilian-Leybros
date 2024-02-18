@@ -43,6 +43,40 @@ body {
   justify-content: center;
 }
 
+.title {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 7px;
+  padding: 5px 12px;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+@supports (display: flex) {
+  @media only screen and (max-width: 720px) {
+    .card-container {
+      > div {
+        margin-bottom: 10px;
+      }
+      flex-direction: column !important;
+    }
+  }
+}
+
+.card-container {
+  flex-direction: row;
+}
+
+.card {
+  & p {
+    color: #7d7d7d;
+    margin: 3px 0 3px 0;
+  }
+  padding: 7px 12px;
+  border: var(--primary) 2px solid;
+  border-radius: 8px;
+}
+
 .align-items-center {
   align-items: center;
 }
