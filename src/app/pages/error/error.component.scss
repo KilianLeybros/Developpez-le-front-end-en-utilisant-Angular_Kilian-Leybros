@@ -1,0 +1,17 @@
+h1 {
+  font-size: 120px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+a {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: underline;
+  &:hover {
+    color: var(--secondary);
+  }
+}

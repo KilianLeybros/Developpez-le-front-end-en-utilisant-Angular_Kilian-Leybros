@@ -1,5 +1,10 @@
 <div class="container">
   <div class="d-flex justify-content-center align-items-center">
-    <router-outlet></router-outlet>
+    <div *ngIf="!loading">
+      <router-outlet *ngIf="!error"></router-outlet>
+
+      <app-error *ngIf="error" [error]="error"></app-error>
+    </div>
+    <div *ngIf="loading" class="loader"></div>
   </div>
 </div>
