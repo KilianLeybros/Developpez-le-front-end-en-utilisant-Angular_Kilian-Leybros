@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public josNumbers: number = 0;
   private destroy$: Subject<boolean> = new Subject();
 
-  public data: any;
+  public data: PieChartData[] | null = null;
   public view: [number, number] = [700, 400];
 
   constructor(private olympicService: OlympicService) {}
