@@ -1,0 +1,26 @@
+.tooltip {
+  padding: 3px 4px;
+}
+
+.material-symbols-outlined {
+  font-size: 15px;
+}
+
+.home-link {
+  display: block;
+  position: absolute;
+  font-size: 20px;
+  top: 30px;
+  left: 40px;
+  text-decoration: none;
+  color: var(--text-regular);
+  &:hover {
+    color: var(--secondary);
+  }
+  &::before {
+    color: var(--primary);
+    font-weight: 700;
+    content: "\003008";
+    margin-right: 10px;
+  }
+}
