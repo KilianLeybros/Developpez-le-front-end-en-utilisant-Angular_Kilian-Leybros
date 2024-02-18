@@ -23,7 +23,19 @@
       [legend]="false"
       [labels]="true"
       [doughnut]="false"
+      (window:resize)="onResize($event)"
     >
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="tooltip p-5">
+          <p>
+            {{ model.name }}
+          </p>
+          <p class="d-flex align-items-center justify-content-center">
+            <span class="material-symbols-outlined"> license </span>
+            {{ model.value }}
+          </p>
+        </div>
+      </ng-template>
     </ngx-charts-pie-chart>
   </div>
 </div>

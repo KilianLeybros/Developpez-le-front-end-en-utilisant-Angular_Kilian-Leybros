@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { Participation } from 'src/app/core/models/Participation';
+import { PieChartData } from 'src/app/core/models/PieChartData';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -19,7 +20,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   public data: PieChartData[] | null = null;
   public view: [number, number] = [700, 400];
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService) {
+    if (innerWidth > 400 && innerWidth < 700) {
+      this.view = [innerWidth, 400];
+    }
+  }
 
   ngOnInit(): void {
     this.olympicService
@@ -48,6 +53,17 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.loading = false;
         },
       });
+  }
+
+  onResize(event: UIEvent): void {
+    const target = event?.target as Window;
+    if (innerWidth > 400 && innerWidth < 700) {
+      this.view = [target.innerWidth, 400];
+    } else if (innerWidth > 700) {
+      this.view = [700, 400];
+    } else if (innerWidth < 400) {
+      this.view = [400, 400];
+    }
   }
 
   ngOnDestroy(): void {
