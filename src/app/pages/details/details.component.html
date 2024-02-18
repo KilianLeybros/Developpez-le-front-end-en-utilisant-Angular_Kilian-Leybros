@@ -1,1 +1,39 @@
-<p>details works!</p>
+<a class="home-link" routerLink="">HOME PAGE</a>
+<div *ngIf="!loading" class="d-flex flex-column align-items-center m-auto">
+  <div class="title d-flex justify-content-center my-20">
+    {{ olympic?.country }}
+  </div>
+  <div class="d-flex card-container justify-content-center mb-20">
+    <div class="d-flex flex-column align-items-center mx-10 card">
+      <p>Number of entries</p>
+      <b>{{ numberOfEntries }}</b>
+    </div>
+    <div class="d-flex flex-column align-items-center mx-10 card">
+      <p>Total number of medals</p>
+      <b>{{ total.numberOfMedals }}</b>
+    </div>
+    <div class="d-flex flex-column align-items-center mx-10 card">
+      <p>Total number of athletes</p>
+      <b>{{ total.numberOfAthletes }}</b>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <ngx-charts-line-chart
+      *ngIf="data"
+      [view]="view"
+      [scheme]="colorScheme"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="false"
+      [results]="data"
+      [animations]="false"
+      [autoScale]="true"
+    >
+    </ngx-charts-line-chart>
+  </div>
+</div>
