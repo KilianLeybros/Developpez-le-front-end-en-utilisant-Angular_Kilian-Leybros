@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SpecificError } from 'src/app/core/models/SpecificError';
 
 @Component({
   selector: 'app-error',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error.component.scss'],
 })
 export class ErrorComponent implements OnInit {
+  @Input() public error!: SpecificError;
+
   constructor() {}
 
   ngOnInit(): void {}
