@@ -16,6 +16,8 @@ export class OlympicService {
 
   constructor(private http: HttpClient) {}
 
+  // Récupération des données via un call http dabs le fichier json et alimentation de l'observable "olympics$"
+  // En cas d'erreur, retourne une erreur 500
   loadInitialData() {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
@@ -34,6 +36,7 @@ export class OlympicService {
     return this.olympics$.asObservable();
   }
 
+  // Récupération des données d'un pays en particulier
   getOlympicsByCountryName(
     selectedCountry: string
   ): Observable<Olympic | undefined> {
