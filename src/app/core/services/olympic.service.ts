@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, filter, map, tap } from 'rxjs/operators';
+import { catchError, filter, map, retry, tap } from 'rxjs/operators';
 import { Olympic } from '../models/Olympic';
+import { SpecificError } from '../models/SpecificError';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +17,16 @@ export class OlympicService {
   constructor(private http: HttpClient) {}
 
   loadInitialData() {
-    return this.http.get<any>(this.olympicUrl).pipe(
+    return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
-      catchError((error, caught) => {
-        // TODO: improve error handling
-        console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
-        this.olympics$.next(null);
-        return caught;
-      })
+      catchError(() => {
+        throw new SpecificError(
+          500,
+          'Internal Server Error',
+          'An internal server error has occured'
+        );
+      }),
+      retry(2)
     );
   }
 
