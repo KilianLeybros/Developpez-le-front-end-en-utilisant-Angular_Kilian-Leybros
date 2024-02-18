@@ -8,7 +8,9 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$: BehaviorSubject<Olympic[] | null> = new BehaviorSubject<
+    Olympic[] | null
+  >(null);
 
   constructor(private http: HttpClient) {}
 
@@ -25,7 +27,7 @@ export class OlympicService {
     );
   }
 
-  getOlympics() {
+  getOlympics(): Observable<Olympic[] | null> {
     return this.olympics$.asObservable();
   }
 }
