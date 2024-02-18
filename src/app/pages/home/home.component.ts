@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Olympic } from 'src/app/core/models/Olympic';
 import { Participation } from 'src/app/core/models/Participation';
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public data: PieChartData[] | null = null;
   public view: [number, number] = [700, 400];
 
-  constructor(private olympicService: OlympicService) {
+  constructor(private olympicService: OlympicService, private router: Router) {
     if (innerWidth > 400 && innerWidth < 700) {
       this.view = [innerWidth, 400];
     }
@@ -53,6 +54,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.loading = false;
         },
       });
+  }
+
+  onSelect(data: { name: string; value: number; label: string }): void {
+    this.router.navigateByUrl(`/details/${data.name}`);
   }
 
   onResize(event: UIEvent): void {

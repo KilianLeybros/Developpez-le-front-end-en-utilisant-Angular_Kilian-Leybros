@@ -24,6 +24,7 @@
       [labels]="true"
       [doughnut]="false"
       (window:resize)="onResize($event)"
+      (select)="onSelect($event)"
     >
       <ng-template #tooltipTemplate let-model="model">
         <div class="tooltip p-5">
