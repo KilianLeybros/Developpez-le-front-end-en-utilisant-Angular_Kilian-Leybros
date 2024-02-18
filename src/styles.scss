@@ -1,1 +1,72 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-familly: "Montserrat", sans-serif;
+  --primary: #04838f;
+  --secondary: #01575f;
+  --lightgray: #ddd;
+  --text-regular: #444;
+}
+
+body {
+  font-family: var(--font-familly);
+  color: var(--text-regular);
+}
+
+.container {
+  min-height: 100vh;
+  max-width: 1200px;
+  display: flex;
+  margin: auto;
+  padding: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.mx-10 {
+  margin: 0 10px 0 10px;
+}
+
+.mx-20 {
+  margin: 0 20px 0 20px;
+}
+
+.my-20 {
+  margin: 20px 0 20px 0;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.p-5 {
+  padding: 5px;
+}
