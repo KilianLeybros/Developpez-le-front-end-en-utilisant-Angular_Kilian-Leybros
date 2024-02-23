@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // Set la largeur et hauteur par défaut du chart en fonction de la fenêtre du navigateur
   constructor(private olympicService: OlympicService, private router: Router) {
-    if (innerWidth > 400 && innerWidth < 700) {
+    if (innerWidth > 300 && innerWidth < 700) {
       this.view = [innerWidth, 400];
     }
   }
@@ -69,12 +69,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Méthode qui permet de resize le chart dans le cas ou la fenêtre du navigateur se rétrécit
   onResize(event: UIEvent): void {
     const target = event?.target as Window;
-    if (innerWidth > 400 && innerWidth < 700) {
+    if (innerWidth > 300 && innerWidth < 700) {
       this.view = [target.innerWidth, 400];
     } else if (innerWidth > 700) {
       this.view = [700, 400];
-    } else if (innerWidth < 400) {
-      this.view = [400, 400];
+    } else if (innerWidth < 300) {
+      this.view = [300, 400];
     }
   }
 
