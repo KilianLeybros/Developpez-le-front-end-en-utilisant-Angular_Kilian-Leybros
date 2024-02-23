@@ -18,7 +18,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    if (innerWidth > 400 && innerWidth < 700) {
+    if (innerWidth > 300 && innerWidth < 700) {
       this.view = [innerWidth, 300];
     }
   }
@@ -97,12 +97,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   // Méthode qui permet de resize le chart dans le cas ou la fenêtre du navigateur se rétrécit
   onResize(event: UIEvent): void {
     const target = event?.target as Window;
-    if (innerWidth > 400 && innerWidth < 700) {
+    if (innerWidth > 300 && innerWidth < 700) {
       this.view = [target.innerWidth, 300];
     } else if (innerWidth > 700) {
       this.view = [700, 300];
-    } else if (innerWidth < 400) {
-      this.view = [400, 300];
+    } else if (innerWidth < 300) {
+      this.view = [300, 300];
     }
   }
 
