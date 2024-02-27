@@ -69,6 +69,7 @@ describe('DetailsComponent', () => {
 
   it('olympic should be initialized', () => {
     expect(olympicServiceSpy.getOlympicsByCountryName).toHaveBeenCalled();
+    expect(fixture.componentInstance.countryName).toEqual('Italy');
     expect(fixture.componentInstance.numberOfEntries).toEqual(3);
     expect(fixture.componentInstance.total.numberOfAthletes).toEqual(1128);
     expect(fixture.componentInstance.total.numberOfMedals).toEqual(96);

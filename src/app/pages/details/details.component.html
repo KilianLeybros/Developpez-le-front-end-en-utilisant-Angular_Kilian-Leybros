@@ -1,7 +1,7 @@
 <a class="home-link" routerLink="">HOME PAGE</a>
 <div *ngIf="!loading" class="d-flex flex-column align-items-center m-auto">
   <div class="title d-flex justify-content-center my-20">
-    {{ olympic?.country }}
+    {{ countryName }}
   </div>
   <div class="d-flex card-container justify-content-center mb-20">
     <div class="d-flex flex-column align-items-center mx-10 card">
@@ -19,7 +19,7 @@
   </div>
   <div class="d-flex justify-content-center">
     <ngx-charts-line-chart
-      *ngIf="data"
+      *ngIf="data.length > 0"
       [view]="view"
       [scheme]="colorScheme"
       [legend]="false"
