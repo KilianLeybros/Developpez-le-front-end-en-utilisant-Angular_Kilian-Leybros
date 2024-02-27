@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { Subject, takeUntil } from 'rxjs';
 import { LineChartData } from 'src/app/core/models/LineChartData';
-import { Olympic } from 'src/app/core/models/Olympic';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
@@ -24,7 +23,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   public loading: boolean = true;
-  public olympic: Olympic | null = null;
+  public countryName: string = 'Country';
   public numberOfEntries: number = 0;
   public total: { numberOfMedals: number; numberOfAthletes: number } = {
     numberOfMedals: 0,
@@ -33,7 +32,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   //Chart options
-  data: LineChartData[] | null = null;
+  data: LineChartData[] | [] = [];
   view: [number, number] = [700, 300];
   colorScheme: Color = {
     name: 'color',
@@ -67,7 +66,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
                 })),
               },
             ];
-            this.olympic = olympic;
+            this.countryName = olympic.country;
             this.numberOfEntries = olympic.participations.length;
             this.total = olympic.participations
               .map(

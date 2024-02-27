@@ -10,9 +10,9 @@ import { SpecificError } from '../models/SpecificError';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$: BehaviorSubject<Olympic[] | null> = new BehaviorSubject<
-    Olympic[] | null
-  >(null);
+  private olympics$: BehaviorSubject<Olympic[] | []> = new BehaviorSubject<
+    Olympic[] | []
+  >([]);
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +32,7 @@ export class OlympicService {
     );
   }
 
-  getOlympics(): Observable<Olympic[] | null> {
+  getOlympics(): Observable<Olympic[] | []> {
     return this.olympics$.asObservable();
   }
 
