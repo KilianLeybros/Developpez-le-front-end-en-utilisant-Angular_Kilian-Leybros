@@ -13,12 +13,11 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public loading: boolean = true;
-  public olympics: Olympic[] | null = null;
   public countriesNumber: number = 0;
   public josNumbers: number = 0;
   private destroy$: Subject<boolean> = new Subject();
 
-  public data: PieChartData[] | null = null;
+  public data: PieChartData[] | [] = [];
   public view: [number, number] = [700, 400];
 
   // Set la largeur et hauteur par défaut du chart en fonction de la fenêtre du navigateur
@@ -37,25 +36,24 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getOlympics()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (olympics: Olympic[] | null) => {
-          if (olympics !== null) {
-            let totalParticipation: Participation[] = [];
-            this.countriesNumber = olympics.length;
-            this.data = olympics.map((o) => {
-              let name: string = o.country;
-              let value: number = 0;
-              o.participations.map((p) => {
-                totalParticipation.push(p);
-                value += p.medalsCount;
-              });
-              return { name, value };
+        next: (olympics: Olympic[] | []) => {
+          let totalParticipation: Participation[] = [];
+          this.countriesNumber = olympics.length;
+          this.data = olympics.map((o) => {
+            let name: string = o.country;
+            let value: number = 0;
+            o.participations.map((p) => {
+              totalParticipation.push(p);
+              value += p.medalsCount;
             });
-            this.josNumbers = totalParticipation
-              .map((x) => x.year)
-              .filter(
-                (value, index, array) => array.indexOf(value) === index
-              ).length;
-          }
+            return { name, value };
+          });
+          this.josNumbers = totalParticipation
+            .map((x) => x.year)
+            .filter(
+              (value, index, array) => array.indexOf(value) === index
+            ).length;
+
           this.loading = false;
         },
       });
